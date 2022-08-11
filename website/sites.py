@@ -1,3 +1,4 @@
+from optparse import Values
 from flask import Blueprint, render_template
 from . import *
 import pygal
@@ -11,6 +12,14 @@ views = Blueprint('views', __name__)
 @views.route('/')
 def home():
 
+
+
+    '''Prepare data for line graph'''
+    values = [1,2,3,4]
+    labels = [1,2,3,4]
+
+
+
     '''Renders bar graph to web page based on Fibonacci sequence.'''
     bar_chart = pygal.Bar(height=300)  # instance of Bar class
     bar_chart.title = 'Zużycie wody przez 7h'  # title of bar chart
@@ -18,7 +27,7 @@ def home():
     chart = bar_chart.render_data_uri()  # render bar chart
 
 
-    return render_template('home.html',chart=chart)
+    return render_template('home.html',chart=chart,values=values, labels=labels)
 
 
 @views.route('/login')

@@ -12,6 +12,31 @@
 
 <body>
 
+    <canvas id="lineChart" width="1300" height="600"></canvas>
+    <script>
+        var ctx = document.getElementById("lineChart").getContext("2d");
+        var lineChart = new Chart(ctx,{
+            type:"line",
+            data: {
+                labels:{{ labels | safe }},
+                datasets:[
+                  {
+                    label:"Data points",
+                    data:{{values | safe}},
+                    fill: false,
+                    boederColor: "rgb(65,105,225)",
+                    lineTension: 1
+                  }
+                ]
+            },
+            options:{
+                responsive: false
+            }
+
+        });
+    </script>
+
+
     <div><embed src={{ chart|safe }} /></div>
 
 

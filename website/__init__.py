@@ -16,8 +16,6 @@ db = mysql.connector.connect(
     database=database,
 )
 
-
-
 def create_app():
 
     app = Flask(__name__)
@@ -37,7 +35,7 @@ def create_app():
 #==================== functions ==========================
 
 
-def select_value_db(select_what,select_from,select_howmany,):
+def select_value_db(select_what,select_from,select_howmany):
     
     mycursor = db.cursor()
 
@@ -74,3 +72,78 @@ def water_use_per_hour(hours):
     chuj = select_value_db("value","water_use",z)
     wynik = float(chuj[0])- float(chuj[-1])
     return wynik
+
+
+
+
+def prepare_date(db):
+    data_test_list = []
+    date_list = []
+    hour_list = []
+
+    
+    
+    
+    mycursor = db.cursor()
+
+
+    
+
+    mycursor.execute("SELECT date FROM heat_pump ")
+
+    resoult = mycursor.fetchall()
+
+
+    for x in resoult:
+        data_test_list.append(x)
+
+    for i in range(1,288):
+        value = list(f"{data_test_list[-i]}")
+        
+        del value[0:2]
+        del value[-3:]
+        del value[10:]
+        joined = "".join(value)
+        date_list.append(joined)
+
+    for i in range(1,288):
+        value = list(f"{data_test_list[-i]}")
+        
+        del value[0:13]
+        del value[-10:]
+        
+        joined = "".join(value)
+        hour_list.append(joined)
+    
+    return hour_list
+
+
+
+
+
+
+def preparing_points():
+    points = []
+    value_int = []
+    value_list = select_value_db("value","water_use",288)
+
+    for i in value_list:
+        x = float(i)
+        value_int.append(x)
+
+    for i in range(1,288):
+        b = value_int[-i]
+        i = -i-1
+        c = value_int[i]
+
+        x = c-b
+        points.append(x)
+
+
+    return points
+
+
+
+
+
+

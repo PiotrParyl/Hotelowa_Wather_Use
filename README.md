@@ -4,10 +4,12 @@ Make sure you have the latest version of Python installed.
 
 
 <in bash console >
+
 git clone <repo-url>
 
-<in bash console >
-pip install -r requirements.txt
+pip install -r pip_install.txt
+
+
 
 <in bash console >
 Running The App

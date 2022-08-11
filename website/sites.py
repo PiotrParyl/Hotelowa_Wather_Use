@@ -15,8 +15,8 @@ def home():
 
 
     '''Prepare data for line graph'''
-    values = [1,2,3,4]
-    labels = [1,2,3,4]
+    values = preparing_points()
+    labels = prepare_date(db)
 
 
 
